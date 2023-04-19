@@ -1,0 +1,1 @@
+# fastapi-ai-microservice-template
