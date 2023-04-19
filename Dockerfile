@@ -10,8 +10,7 @@ RUN pip install --upgrade pip
 COPY ./src /src
 WORKDIR /src
 
-# INSTALL FASTAPI AND PYTHON REQUIREMENTS
-RUN pip install fastapi[all] --no-warn-script-location
+# INSTALL PYTHON REQUIREMENTS
 ADD requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
