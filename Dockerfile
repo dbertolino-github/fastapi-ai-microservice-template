@@ -11,6 +11,7 @@ COPY ./src /src
 WORKDIR /src
 
 # INSTALL PYTHON REQUIREMENTS
+RUN pip install fastapi[all] --no-warn-script-location
 ADD requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 

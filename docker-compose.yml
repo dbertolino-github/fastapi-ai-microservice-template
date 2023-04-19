@@ -1,0 +1,20 @@
+version: '3.8'
+networks: 
+  application: 
+    driver: bridge
+    
+services:
+
+  fastapi-huggingface-inference:
+      image: fastapi-huggingface-inference
+      container_name: fastapi-huggingface-inference
+      build:
+        context: ./
+        dockerfile: ./Dockerfile
+      ports:
+        - 8080:80
+      volumes:
+        - ./src:/src
+      networks: 
+        - application
+      command: bash -c "sleep 5s && uvicorn main:app --host 0.0.0.0 --port 80"
