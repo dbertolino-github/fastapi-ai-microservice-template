@@ -1,1 +1,1 @@
-# fastapi-ai-microservice-template
+# fastapi-huggingface-template
