@@ -2,6 +2,7 @@ import logging.config
 from fastapi import FastAPI, Response
 from pydantic import BaseModel
 import os
+from huggingface import HugginfacePipeline
 
 # setup loggers
 folder_path = os.sep.join(os.path.abspath(__file__).split(os.sep)[:-1])
@@ -11,10 +12,10 @@ logging.config.fileConfig(os.path.join(folder_path, 'logging.conf'), disable_exi
 logger = logging.getLogger(__name__)  # the __name__ resolve to "main" since we are at the root of the project.
 
 app = FastAPI()
+ai_pipeline = HugginfacePipeline()
 
 class QueryingData(BaseModel):
-    input_1: int
-    input_2: str
+    text: str
 
 @app.get("/")
 def health_check():
@@ -22,6 +23,4 @@ def health_check():
 
 @app.post("/predict", status_code=200)
 async def post_query_classifier(data: QueryingData, response: Response):
-    return {
-        "model_prediction" : 0.17
-    }
+    return ai_pipeline.analyze(data.text)

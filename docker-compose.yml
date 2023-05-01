@@ -5,16 +5,16 @@ networks:
     
 services:
 
-  fastapi-huggingface-inference:
-      image: fastapi-huggingface-inference
-      container_name: fastapi-huggingface-inference
+  fastapi-huggingface:
+      image: fastapi-huggingface
+      container_name: fastapi-huggingface
       build:
         context: ./
         dockerfile: ./Dockerfile
       ports:
-        - 8080:80
+        - 8081:80
       volumes:
         - ./src:/src
       networks: 
         - application
-      command: bash -c "sleep 5s && uvicorn main:app --host 0.0.0.0 --port 80"
+      command: bash -c "sleep 5s && uvicorn main:app --host 0.0.0.0 --port 80 --reload"
